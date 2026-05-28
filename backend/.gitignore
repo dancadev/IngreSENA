@@ -1,0 +1,39 @@
+# Entorno virtual
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite
+db.sqlite3
+
+# Variables entorno
+.env
+
+# Archivos media
+media/
+
+# Archivos estáticos compilados
+staticfiles/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+
+# Migrations compiladas
+*.pyo
