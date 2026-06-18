@@ -1,0 +1,31 @@
+.login-container {
+    display: flex;
+    width: 100vh;
+}
+
+.content1 {
+    width: 50%;
+}
+
+.iconSena {
+    width: 100px;
+}
+
+.imgLogin {
+    width: 50vh;
+}
+
+.content2 {
+    width: 50%;
+    background-color: transparent,green;
+    align-content: center;
+}
+
+main {
+    height: auto;    
+    background-color: white;
+    justify-content: center;
+    align-content: center;
+    border-radius: 20px;
+    width: auto;
+}
