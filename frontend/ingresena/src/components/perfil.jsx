@@ -1,4 +1,10 @@
+import { useState } from "react";
+import ModalRegistrarEquipo from "./modalRegistroEquipos";
+import sinPerfil from"../assets/sinPerfil.jpg";
+
 function Perfil() {
+
+    const [modalAbierto, setModalAbierto] = useState(false);
 
     return (
 
@@ -11,7 +17,7 @@ function Perfil() {
                     {/* FOTO */}
                     <div className="w-1/4 flex justify-center">
                         <img
-                            src=""
+                            src={sinPerfil}
                             alt="fotoPerfil"
                             className="w-40 h-40 rounded-full object-cover border-4 border-purple-200"
                         />
@@ -27,7 +33,7 @@ function Perfil() {
                                     Nombre del Empleado
                                 </h1>
 
-                                <p className="text-green-600 font-semibold">
+                                <p className="text-green-700 font-semibold">
                                     Cargo
                                 </p>
                             </div>
@@ -80,7 +86,10 @@ function Perfil() {
                         {/* BOTONES */}
                         <div className="flex gap-4 mt-10">
 
-                            <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-medium transition">
+                            <button
+                                onClick={() => setModalAbierto(true)}
+                                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-medium transition"
+                            >
                                 Registrar Equipo
                             </button>
 
@@ -99,6 +108,11 @@ function Perfil() {
                 </div>
 
             </div>
+
+            <ModalRegistrarEquipo
+                abierto={modalAbierto}
+                cerrar={() => setModalAbierto(false)}
+            />
 
         </div>
 

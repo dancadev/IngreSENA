@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-function Menu() {
+function Menu({ cambiarVista }) {
     return (
-        <aside className="w-[20%] h-screen overflow-y-auto bg-blue-900 text-white fixed left-0 top-0">
+        <aside className="w-[20%] h-screen overflow-y-auto bg-green-700  text-white fixed left-0 top-0">
 
             {/* Logo */}
             <div className="p-8">
@@ -11,38 +11,43 @@ function Menu() {
                 </h1>
             </div>
 
-            {/* Menú */}
-            <nav className="flex flex-col gap-3 px-6">
+            {/* Menu */}
+            <nav className="flex flex-col gap-3 rounded-xl px-6">
 
-                <button className="bg-white text-blue-900 rounded-full px-5 py-3 font-medium text-left">
+                <button onClick={() => cambiarVista("perfil")}
+                    className="bg-white text-green-700 rounded-full px-5 py-3 font-medium text-left">
                     Registro Usuario
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+
+                <button onClick={() => cambiarVista("historial")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Historial
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button
+                    onClick={() => cambiarVista("empleados")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Empleados
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Equipos
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Control de Accesos
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Visitantes
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Reportes
                 </button>
 
-                <button className="px-5 py-3 hover:bg-blue-800 rounded-xl transition text-left">
+                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Configuración
                 </button>
 
