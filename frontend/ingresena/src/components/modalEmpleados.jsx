@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { registrarEmpleado } from "../services/empleados.js";
 
-function ModalEmpleado({ abierto, cerrar }) {
+function ModalEmpleado({ abierto, cerrar, alRegistrar }) {
 
     const [empleado, setEmpleado] = useState({
 
         nombre: "",
-        tipoDocumento: "",
+        tipoDocumento: "CC",
         documento: "",
         fechaNacimiento: "",
         sexo: "",
@@ -46,15 +47,51 @@ function ModalEmpleado({ abierto, cerrar }) {
 
     };
 
-    const guardarEmpleado = (e) => {
+    const guardarEmpleado = async (e) => {
 
         e.preventDefault();
 
-        console.log(empleado);
+        const datos = {
 
-        alert("Empleado registrado correctamente");
+            nombre: empleado.nombre,
+            tipo_documento: empleado.tipoDocumento,
+            documento: empleado.documento,
+            fecha_nacimiento: empleado.fechaNacimiento || null,
+            sexo: empleado.sexo,
+            cargo: empleado.cargo,
+            area: empleado.area,
+            estado: empleado.estado,
+            correo: empleado.correo,
+            telefono: empleado.telefono,
+            direccion: empleado.direccion,
 
-        cerrar();
+        };
+
+        try {
+
+            const respuesta = await registrarEmpleado(datos);
+
+            if (respuesta.id) {
+
+                alert("Empleado registrado correctamente");
+
+                alRegistrar?.();
+
+                cerrar();
+
+            } else {
+
+                alert("Error al registrar el empleado");
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Error al registrar el empleado");
+
+        }
 
     };
 
@@ -110,7 +147,6 @@ function ModalEmpleado({ abierto, cerrar }) {
                                         className="w-full h-full object-cover"
 
                                     />
-
                                     :
 
                                     <span className="text-gray-500">
@@ -159,6 +195,8 @@ function ModalEmpleado({ abierto, cerrar }) {
 
                                     onChange={handleChange}
 
+                                    required
+
                                 />
 
                                 <select
@@ -171,17 +209,13 @@ function ModalEmpleado({ abierto, cerrar }) {
 
                                 >
 
-                                    <option value="">
+                                    <option value="CC">CC</option>
 
-                                        Tipo Documento
+                                    <option value="CE">CE</option>
 
-                                    </option>
+                                    <option value="TI">TI</option>
 
-                                    <option>CC</option>
-
-                                    <option>CE</option>
-
-                                    <option>TI</option>
+                                    <option value="P">P</option>
 
                                 </select>
 
@@ -194,6 +228,8 @@ function ModalEmpleado({ abierto, cerrar }) {
                                     className="border rounded-lg p-3"
 
                                     onChange={handleChange}
+
+                                    required
 
                                 />
 
@@ -229,6 +265,8 @@ function ModalEmpleado({ abierto, cerrar }) {
 
                                     <option>Femenino</option>
 
+                                    <option>Otro</option>
+
                                 </select>
 
                             </div>
@@ -257,6 +295,8 @@ function ModalEmpleado({ abierto, cerrar }) {
 
                                     onChange={handleChange}
 
+                                    required
+
                                 />
 
                                 <select
@@ -267,9 +307,14 @@ function ModalEmpleado({ abierto, cerrar }) {
 
                                     onChange={handleChange}
 
+                                    required
                                 >
 
-                                    <option>Área</option>
+                                    <option value="">
+
+                                        Área
+
+                                    </option>
 
                                     <option>Sistemas</option>
 

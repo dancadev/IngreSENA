@@ -1,35 +1,4 @@
-function TablaEmpleados() {
-
-    const empleados = [
-
-        {
-            id: 1,
-            nombre: "Juan Pérez",
-            cedula: "123456789",
-            cargo: "Instructor",
-            area: "Sistemas",
-            estado: "Activo"
-        },
-
-        {
-            id: 2,
-            nombre: "María Gómez",
-            cedula: "987654321",
-            cargo: "Coordinadora",
-            area: "Administración",
-            estado: "Activo"
-        },
-
-        {
-            id: 3,
-            nombre: "Carlos Díaz",
-            cedula: "112233445",
-            cargo: "Instructor",
-            area: "Electrónica",
-            estado: "Inactivo"
-        }
-
-    ];
+function TablaEmpleados({ empleados, cargando }) {
 
     return (
 
@@ -43,7 +12,7 @@ function TablaEmpleados() {
 
                         <tr>
 
-                            <th className="p-4 text-left">Foto</th>
+                            <th className="p-4 text-left">Código</th>
 
                             <th className="p-4 text-left">Nombre</th>
 
@@ -63,6 +32,22 @@ function TablaEmpleados() {
 
                     <tbody>
 
+                        {cargando && (
+                            <tr>
+                                <td colSpan={7} className="p-8 text-center text-gray-500">
+                                    Cargando empleados...
+                                </td>
+                            </tr>
+                        )}
+
+                        {!cargando && empleados.length === 0 && (
+                            <tr>
+                                <td colSpan={7} className="p-8 text-center text-gray-500">
+                                    No se encontraron empleados.
+                                </td>
+                            </tr>
+                        )}
+
                         {empleados.map((empleado) => (
 
                             <tr
@@ -70,22 +55,28 @@ function TablaEmpleados() {
                                 className="border-b hover:bg-gray-50"
                             >
 
-                                <td className="p-4">
-
-                                    <img
-                                        src="https://placehold.co/45x45"
-                                        alt="Empleado"
-                                        className="w-11 h-11 rounded-full"
-                                    />
-
+                                <td className="p-4 font-mono text-sm">
+                                    {empleado.codigo_barras}
                                 </td>
 
                                 <td className="p-4">
-                                    {empleado.nombre}
+                                    <div className="flex items-center gap-3">
+
+                                        <img
+                                            src="https://placehold.co/45x45"
+                                            alt="Empleado"
+                                            className="w-9 h-9 rounded-full"
+                                        />
+
+                                        <span className="font-medium">
+                                            {empleado.nombre}
+                                        </span>
+
+                                    </div>
                                 </td>
 
                                 <td className="p-4">
-                                    {empleado.cedula}
+                                    {empleado.tipo_documento} {empleado.documento}
                                 </td>
 
                                 <td className="p-4">

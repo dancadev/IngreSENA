@@ -36,13 +36,21 @@ def registrar_acceso(request):
 
     codigo = serializer.validated_data["codigo_barras"].strip()
 
+    # Buscar primero por código de barras
     empleado = Empleado.objects.filter(codigo_barras=codigo).first()
     visitante = Visitante.objects.filter(codigo_barras=codigo).first()
     equipo = Equipo.objects.filter(codigo_barras=codigo).first()
 
-    # Buscar también por serial para los equipos
+    # También por serial para los equipos
     if equipo is None:
         equipo = Equipo.objects.filter(serial=codigo).first()
+
+    # También por documento (cédula) para empleados y visitantes
+    if empleado is None:
+        empleado = Empleado.objects.filter(documento=codigo).first()
+
+    if visitante is None:
+        visitante = Visitante.objects.filter(documento=codigo).first()
 
     if empleado:
         tipo_registro = "Empleado"

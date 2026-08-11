@@ -10,8 +10,27 @@ from .serializers import EmpleadoSerializer
 def empleados(request):
 
     if request.method == "GET":
-        lista = Empleado.objects.all().order_by("-id")
-        serializer = EmpleadoSerializer(lista, many=True)
+
+        queryset = Empleado.objects.all().order_by("-id")
+
+        buscar = request.query_params.get("buscar")
+        area = request.query_params.get("area")
+        estado = request.query_params.get("estado")
+
+        if buscar:
+            queryset = queryset.filter(
+                nombre__icontains=buscar
+            ) | queryset.filter(
+                documento__icontains=buscar
+            ) | queryset.filter(
+                cargo__icontains=buscar
+            )
+        if area:
+            queryset = queryset.filter(area=area)
+        if estado:
+            queryset = queryset.filter(estado=estado)
+
+        serializer = EmpleadoSerializer(queryset, many=True)
         return Response(serializer.data)
 
     if request.method == "POST":

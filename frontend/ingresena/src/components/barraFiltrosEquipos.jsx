@@ -26,7 +26,7 @@ function BarraFiltrosEquipos({ alBuscar, abrirModal }) {
 
                 <input
                     type="text"
-                    placeholder="Buscar por usuario, serial o código..."
+                    placeholder="Buscar por usuario, cédula, serial o código..."
                     value={buscar}
                     onChange={(e) => setBuscar(e.target.value)}
                     className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-[#39A900]"

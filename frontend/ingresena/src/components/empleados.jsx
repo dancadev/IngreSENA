@@ -1,13 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import TarjetaResumen from "./tarjetaResumen.jsx";
 import BarraFiltrosEmpleados from "./barraFiltrosEmpleados.jsx";
 import TablaEmpleados from "./tablaEmpleados.jsx";
 import ModalEmpleado from "./modalEmpleados.jsx";
 
+import { listarEmpleados } from "../services/empleados.js";
+
 function Empleados() {
 
+    const [empleados, setEmpleados] = useState([]);
+    const [filtros, setFiltros] = useState({});
     const [modalAbierto, setModalAbierto] = useState(false);
+    const [cargando, setCargando] = useState(true);
+    const [recarga, setRecarga] = useState(0);
+
+    useEffect(() => {
+
+        let activo = true;
+
+        listarEmpleados(filtros)
+            .then((datos) => {
+                if (activo) setEmpleados(datos);
+            })
+            .catch((error) => {
+                console.error(error);
+                if (activo) setEmpleados([]);
+            })
+            .finally(() => {
+                if (activo) setCargando(false);
+            });
+
+        return () => {
+            activo = false;
+        };
+
+    }, [filtros, recarga]);
+
+    const alBuscar = (nuevosFiltros) => {
+
+        setCargando(true);
+        setFiltros(nuevosFiltros);
+
+    };
+
+    const activos = empleados.filter((e) => e.estado === "Activo").length;
+    const areas = new Set(empleados.map((e) => e.area)).size;
 
     return (
 
@@ -27,59 +65,60 @@ function Empleados() {
 
             </div>
 
-
             {/* TARJETAS */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
                 <TarjetaResumen
                     titulo="Total Empleados"
-                    valor="256"
+                    valor={empleados.length}
                     icono="👥"
                     color="#39A900"
                 />
 
                 <TarjetaResumen
                     titulo="Activos"
-                    valor="248"
+                    valor={activos}
                     icono="✅"
                     color="#39A900"
                 />
 
                 <TarjetaResumen
                     titulo="Áreas"
-                    valor="12"
+                    valor={areas}
                     icono="🏢"
                     color="#39A900"
                 />
 
                 <TarjetaResumen
                     titulo="Nuevos"
-                    valor="5"
+                    valor={empleados.length - activos}
                     icono="🆕"
                     color="#39A900"
                 />
 
             </div>
 
-
             {/* FILTROS */}
 
             <BarraFiltrosEmpleados
+                alBuscar={alBuscar}
                 abrirModal={() => setModalAbierto(true)}
             />
 
-
             {/* TABLA */}
 
-            <TablaEmpleados />
-
+            <TablaEmpleados
+                empleados={empleados}
+                cargando={cargando}
+            />
 
             {/* MODAL */}
 
             <ModalEmpleado
                 abierto={modalAbierto}
                 cerrar={() => setModalAbierto(false)}
+                alRegistrar={() => setRecarga((r) => r + 1)}
             />
 
         </div>

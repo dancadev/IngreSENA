@@ -5,6 +5,8 @@ from rest_framework import status
 from .models import Equipo
 from .serializers import EquipoSerializer
 
+from empleados.models import Empleado
+
 
 @api_view(["GET", "POST"])
 def equipos(request):
@@ -18,13 +20,22 @@ def equipos(request):
         area = request.query_params.get("area")
 
         if buscar:
+            # También permite buscar por la cédula del empleado asignado
+            ids_empleados = list(
+                Empleado.objects.filter(documento__icontains=buscar)
+                .values_list("id", flat=True)
+            )
             queryset = queryset.filter(
                 usuario_asignado__icontains=buscar
             ) | queryset.filter(
                 serial__icontains=buscar
             ) | queryset.filter(
                 codigo_barras__icontains=buscar
+            ) | queryset.filter(
+                codigo_inventario__icontains=buscar
             )
+            if ids_empleados:
+                queryset = queryset | Equipo.objects.filter(id_empleado__in=ids_empleados)
         if tipo_equipo:
             queryset = queryset.filter(tipo_equipo=tipo_equipo)
         if area:
