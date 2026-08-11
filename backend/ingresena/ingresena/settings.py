@@ -43,6 +43,10 @@ INSTALLED_APPS = [
 
     'usuarios',
     'equipos',
+    'empleados',
+    'accesos',
+    'visitantes',
+    'reportes',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +88,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "ingresena_db",
         "USER": "postgres",
-        "PASSWORD": "",
+        "PASSWORD": "Ing890314",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }

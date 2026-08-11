@@ -1,6 +1,6 @@
-const URL = "http://127.0.0.1:8000/api/equipos/";
+const URL = "http://127.0.0.1:8000/api/accesos/";
 
-export async function listarEquipos(filtros = {}) {
+export async function listarAccesos(filtros = {}) {
 
     const params = new URLSearchParams();
 
@@ -15,9 +15,9 @@ export async function listarEquipos(filtros = {}) {
     return await respuesta.json();
 }
 
-export async function registrarEquipo(datos) {
+export async function registrarAcceso(codigoBarras) {
 
-    const respuesta = await fetch(URL, {
+    const respuesta = await fetch(`${URL}registrar/`, {
 
         method: "POST",
 
@@ -25,7 +25,7 @@ export async function registrarEquipo(datos) {
             "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(datos),
+        body: JSON.stringify({ codigo_barras: codigoBarras }),
 
     });
 

@@ -5,10 +5,12 @@ import Inicio from "../pages/inicio.jsx";
 import Login from "../pages/login.jsx";
 
 // IMPORTACIONES DE COMPONENTES
-import Menu from "../components/menu.jsx";
 import Perfil from "../components/perfil.jsx";
 import Historial from "../components/historial.jsx";
-import TarjetaResumen from "../components/tarjetaResumen.jsx";
+import Equipos from "../components/equipos.jsx";
+import ControlAccesos from "../components/controlAccesos.jsx";
+import Visitantes from "../components/visitantes.jsx";
+import Reportes from "../components/reportes.jsx";
 
 function Rutas() {
     return (
@@ -17,7 +19,11 @@ function Rutas() {
                 <Route path="/" element={< Login />} />
                 <Route path="/inicio" element={< Inicio />} />
                 <Route path="/perfil" element={< Perfil />} />
-                <Route path="/historial" element={< Historial />} />            
+                <Route path="/historial" element={< Historial />} />
+                <Route path="/equipos" element={< Equipos />} />
+                <Route path="/accesos" element={< ControlAccesos />} />
+                <Route path="/visitantes" element={< Visitantes />} />
+                <Route path="/reportes" element={< Reportes />} />            
             </Routes>
         </BrowserRouter>
     );

@@ -3,7 +3,11 @@ import { useState } from "react";
 import Menu from "../components/menu.jsx";
 import Perfil from "../components/perfil.jsx";
 import Historial from "../components/historial.jsx";
-import Empleados from"../components/empleados.jsx";
+import Empleados from "../components/empleados.jsx";
+import Equipos from "../components/equipos.jsx";
+import ControlAccesos from "../components/controlAccesos.jsx";
+import Visitantes from "../components/visitantes.jsx";
+import Reportes from "../components/reportes.jsx";
 
 function Inicio() {
 
@@ -22,6 +26,10 @@ function Inicio() {
                 { vista === "perfil" && < Perfil />}
                 { vista === "historial" && < Historial/>}
                 {vista === "empleados" && <Empleados />}
+                {vista === "equipos" && <Equipos />}
+                {vista === "accesos" && <ControlAccesos />}
+                {vista === "visitantes" && <Visitantes />}
+                {vista === "reportes" && <Reportes />}
                 
             </main>
             

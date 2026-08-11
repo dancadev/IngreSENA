@@ -31,19 +31,27 @@ function Menu({ cambiarVista }) {
                     Empleados
                 </button>
 
-                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
+                <button
+                    onClick={() => cambiarVista("equipos")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Equipos
                 </button>
 
-                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
+                <button
+                    onClick={() => cambiarVista("accesos")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Control de Accesos
                 </button>
 
-                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
+                <button
+                    onClick={() => cambiarVista("visitantes")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Visitantes
                 </button>
 
-                <button className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
+                <button
+                    onClick={() => cambiarVista("reportes")}
+                    className="px-5 py-3 hover:bg-green-800 rounded-xl transition text-left">
                     Reportes
                 </button>
 

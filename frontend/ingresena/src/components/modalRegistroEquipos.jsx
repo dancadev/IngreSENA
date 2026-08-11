@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { registrarEquipo } from "../services/equipos.js";
 
-function ModalRegistrarEquipo({ abierto, cerrar }) {
+function ModalRegistrarEquipo({ abierto, cerrar, alRegistrar }) {
 
     const [formulario, setFormulario] = useState({
         usuario_asignado: "",
@@ -36,6 +36,8 @@ function ModalRegistrarEquipo({ abierto, cerrar }) {
             alert("Equipo registrado correctamente");
 
             console.log(respuesta);
+
+            alRegistrar?.();
 
             cerrar();
 
